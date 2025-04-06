@@ -5,10 +5,9 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class SignUpRequestDto {
+public class MemberResponseDto {
 
     private final String username;
-    private final String password;
     private final String email;
 
 }

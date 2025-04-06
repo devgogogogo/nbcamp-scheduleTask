@@ -26,7 +26,7 @@ public class MemoController {
     }
 
     @GetMapping("/{id}") //단일 조회
-    public ResponseEntity<MemoResponseDto> get(@PathVariable Long id) {
+    public ResponseEntity<MemoResponseDto> findById(@PathVariable Long id) {
 
         //id 를 넣었을때 MemoResponseDto 의 반환값으로 가져온다.
         MemoResponseDto findById = memoService.findById(id);
