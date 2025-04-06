@@ -9,8 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -31,17 +29,10 @@ public class MemoController {
     @GetMapping("/{id}") //단일 조회
     public ResponseEntity<MemoWithEmailResponseDto> findById(@PathVariable Long id) {
 
-        memoService.findById(id);
+        MemoWithEmailResponseDto byId = memoService.findById(id);
 
-
-        return new ResponseEntity<>(,HttpStatus.OK);
+        return new ResponseEntity<>(byId,HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<MemoWithEmailResponseDto>> findAll() {
 
-        List<MemoWithEmailResponseDto> memoList = memoService.findAll();
-
-        return new ResponseEntity<>(memoList,HttpStatus.OK);
-    }
 }

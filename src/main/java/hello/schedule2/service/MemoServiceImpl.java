@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,7 +18,7 @@ public class MemoServiceImpl implements MemoService {
 
     private final MemoRepository memoRepository;
 
-    @Override
+    @Override //완료
     public MemoResponseDto save(String userName, String title, String contents) {
 
         Memo memo = new Memo(userName, title, contents);
@@ -29,7 +27,7 @@ public class MemoServiceImpl implements MemoService {
         return new MemoResponseDto(savedMemo.getId(),savedMemo.getTitle(), savedMemo.getContent());
     }
 
-    @Override
+    @Override  //완료
     public MemoWithEmailResponseDto findById(Long id) {
 
         //Optional 타입으로 반환된다. 객체 안에 실제로 값이 있는지 확인하는 역할을 한다.
@@ -50,25 +48,11 @@ public class MemoServiceImpl implements MemoService {
         //Memo 타입으로 다시 반환
         Memo findMemo = optionalMemo.get();
 
-        //member 타입으로 하나더 -->> email를 불러오기 위해 가독성을위해 따로준비
+        //member 타입으로 하나더 -->>member에 있는 email를 불러오기 위해 가독성을위해 따로준비
         Member writer = findMemo.getMember();
 
         MemoWithEmailResponseDto memoWithEmailResponseDto = new MemoWithEmailResponseDto(findMemo.getTitle(), findMemo.getContent(), writer.getEmail());
         return memoWithEmailResponseDto;
     }
 
-    @Override
-    public List<MemoWithEmailResponseDto> findAll() {
-
-        List<Memo> findEntityList = memoRepository.findAll();
-
-        List<MemoWithEmailResponseDto> memoWithEmailResponseDtoList = new ArrayList<>();
-
-        for (Memo memo : findEntityList) {
-            MemoWithEmailResponseDto memoWithEmailResponseDto = new MemoWithEmailResponseDto(me);
-
-        }
-
-        return ;
-    }
 }

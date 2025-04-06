@@ -11,5 +11,5 @@ public interface MemoService {
 
     MemoWithEmailResponseDto findById(Long id);
 
-    List<MemoWithEmailResponseDto> findAll();
+
 }
