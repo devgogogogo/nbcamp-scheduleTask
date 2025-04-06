@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -24,6 +26,14 @@ public class MemoController {
 
         //반환값은 응답dto로 반환한다.
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<MemoResponseDto>> findAll() {
+
+        List<MemoResponseDto> memoResponseDto = memoService.findAll();
+
+        return new ResponseEntity<>(memoResponseDto,HttpStatus.OK);
     }
 
     @GetMapping("/{id}") //단일 조회

@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -64,5 +66,25 @@ public class MemoServiceImpl implements MemoService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "삭제할수 있는 아이뒤가 없습니다." + id);
         }
         memoRepository.delete(findId.get());
+    }
+
+    @Override
+    public List<MemoResponseDto> findAll() {
+
+        //데이터 베이스에서 Memo 엔티티 목록을 가져옴 가져오니깐 리스트로 반환됬음
+        List<Memo> findAllMemo = memoRepository.findAll();
+
+        //반환할 Dto 리스트를 만들어줌
+        List<MemoResponseDto> memoResponseDtoList = new ArrayList<>();
+
+        //이제 옮겨줄일만 남았는데 향상된 for문을 사용함
+        for (Memo memo : findAllMemo) {
+            // 줄여서 할수있지만
+//            memoResponseDtoList.add(new MemoResponseDto(memo.getId(),memo.getTitle(),memo.getContent()));
+
+            MemoResponseDto dto = new MemoResponseDto(memo.getId(),memo.getTitle(),memo.getContent());
+            memoResponseDtoList.add(dto); // 가독성을 위해서 나눠났음
+        }
+        return memoResponseDtoList;
     }
 }
