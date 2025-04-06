@@ -1,13 +1,17 @@
 package hello.schedule2.service;
 
-import hello.schedule2.memoDto.MemoResponseDto;
+import hello.schedule2.entity.Member;
 import hello.schedule2.entity.Memo;
+import hello.schedule2.memoDto.MemoResponseDto;
+import hello.schedule2.memoDto.MemoWithEmailResponseDto;
 import hello.schedule2.repository.MemoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,7 +30,7 @@ public class MemoServiceImpl implements MemoService {
     }
 
     @Override
-    public MemoResponseDto findById(Long id) {
+    public MemoWithEmailResponseDto findById(Long id) {
 
         //Optional 타입으로 반환된다. 객체 안에 실제로 값이 있는지 확인하는 역할을 한다.
         /*
@@ -46,9 +50,25 @@ public class MemoServiceImpl implements MemoService {
         //Memo 타입으로 다시 반환
         Memo findMemo = optionalMemo.get();
 
-        //responeDto로 반환
-        MemoResponseDto memoResponseDto = new MemoResponseDto(findMemo.getId(),findMemo.getTitle(), findMemo.getContent());
+        //member 타입으로 하나더 -->> email를 불러오기 위해 가독성을위해 따로준비
+        Member writer = findMemo.getMember();
 
-        return memoResponseDto;
+        MemoWithEmailResponseDto memoWithEmailResponseDto = new MemoWithEmailResponseDto(findMemo.getTitle(), findMemo.getContent(), writer.getEmail());
+        return memoWithEmailResponseDto;
+    }
+
+    @Override
+    public List<MemoWithEmailResponseDto> findAll() {
+
+        List<Memo> findEntityList = memoRepository.findAll();
+
+        List<MemoWithEmailResponseDto> memoWithEmailResponseDtoList = new ArrayList<>();
+
+        for (Memo memo : findEntityList) {
+            MemoWithEmailResponseDto memoWithEmailResponseDto = new MemoWithEmailResponseDto(me);
+
+        }
+
+        return ;
     }
 }

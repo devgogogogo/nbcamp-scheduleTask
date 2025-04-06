@@ -41,7 +41,6 @@ public class MemberServiceImpl implements MemberService {
         Member findMember = findById.get();
 
         //responseDto 한테 정보를 준다.
-
         return new MemberResponseDto(findMember.getUserName(), findMember.getEmail());
     }
 }

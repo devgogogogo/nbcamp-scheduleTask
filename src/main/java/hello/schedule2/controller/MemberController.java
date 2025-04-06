@@ -27,8 +27,8 @@ public class MemberController {
     @GetMapping("/{id}")
     public ResponseEntity<MemberResponseDto> findById(@PathVariable Long id) {
 
-        MemberResponseDto findById = memberService.findById(id);
+        MemberResponseDto memberResponseDto = memberService.findById(id);
 
-        return new ResponseEntity<>(findById,HttpStatus.OK);
+        return new ResponseEntity<>(memberResponseDto,HttpStatus.OK);
     }
 }

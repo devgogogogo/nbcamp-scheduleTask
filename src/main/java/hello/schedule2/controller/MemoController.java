@@ -2,11 +2,14 @@ package hello.schedule2.controller;
 
 import hello.schedule2.memoDto.MemoRequestDto;
 import hello.schedule2.memoDto.MemoResponseDto;
+import hello.schedule2.memoDto.MemoWithEmailResponseDto;
 import hello.schedule2.service.MemoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -26,11 +29,19 @@ public class MemoController {
     }
 
     @GetMapping("/{id}") //단일 조회
-    public ResponseEntity<MemoResponseDto> findById(@PathVariable Long id) {
+    public ResponseEntity<MemoWithEmailResponseDto> findById(@PathVariable Long id) {
 
-        //id 를 넣었을때 MemoResponseDto 의 반환값으로 가져온다.
-        MemoResponseDto findById = memoService.findById(id);
+        memoService.findById(id);
 
-        return new ResponseEntity<>(findById,HttpStatus.OK);
+
+        return new ResponseEntity<>(,HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<MemoWithEmailResponseDto>> findAll() {
+
+        List<MemoWithEmailResponseDto> memoList = memoService.findAll();
+
+        return new ResponseEntity<>(memoList,HttpStatus.OK);
     }
 }
