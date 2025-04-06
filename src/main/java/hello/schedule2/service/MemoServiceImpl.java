@@ -55,4 +55,14 @@ public class MemoServiceImpl implements MemoService {
         return memoWithEmailResponseDto;
     }
 
+    @Override
+    public void delete(Long id) {
+
+        //일단 게시물이 있는지 확인부터
+        Optional<Memo> findId = memoRepository.findById(id);
+        if (findId.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "삭제할수 있는 아이뒤가 없습니다." + id);
+        }
+        memoRepository.delete(findId.get());
+    }
 }

@@ -31,8 +31,13 @@ public class MemoController {
 
         MemoWithEmailResponseDto byId = memoService.findById(id);
 
-        return new ResponseEntity<>(byId,HttpStatus.OK);
+        return new ResponseEntity<>(byId, HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
 
+        memoService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
