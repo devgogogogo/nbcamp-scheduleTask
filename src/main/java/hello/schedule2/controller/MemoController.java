@@ -1,8 +1,8 @@
 package hello.schedule2.controller;
 
-import hello.schedule2.memoDto.MemoRequestDto;
-import hello.schedule2.memoDto.MemoResponseDto;
-import hello.schedule2.memoDto.MemoWithEmailResponseDto;
+import hello.schedule2.dto.memoDto.MemoRequestDto;
+import hello.schedule2.dto.memoDto.MemoResponseDto;
+import hello.schedule2.dto.memoDto.MemoWithEmailResponseDto;
 import hello.schedule2.service.MemoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,8 +1,8 @@
 package hello.schedule2.controller;
 
-import hello.schedule2.memberDto.MemberResponseDto;
-import hello.schedule2.memberDto.SignUpRequestDto;
-import hello.schedule2.memberDto.SignUpResponseDto;
+import hello.schedule2.dto.memberDto.MemberResponseDto;
+import hello.schedule2.dto.memberDto.SignUpRequestDto;
+import hello.schedule2.dto.memberDto.SignUpResponseDto;
 import hello.schedule2.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class MemberController {
     public ResponseEntity<SignUpResponseDto> signUp(@RequestBody SignUpRequestDto dto) {
 
         SignUpResponseDto signUpResponseDto = memberService.signUp(dto.getUsername(), dto.getPassword(), dto.getEmail());
-
+        
         return new ResponseEntity<>(signUpResponseDto, HttpStatus.CREATED);
     }
 

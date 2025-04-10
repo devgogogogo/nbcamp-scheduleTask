@@ -1,4 +1,4 @@
-package hello.schedule2.memoDto;
+package hello.schedule2.dto.memoDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

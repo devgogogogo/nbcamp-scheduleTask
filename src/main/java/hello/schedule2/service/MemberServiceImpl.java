@@ -1,8 +1,8 @@
 package hello.schedule2.service;
 
 import hello.schedule2.entity.Member;
-import hello.schedule2.memberDto.MemberResponseDto;
-import hello.schedule2.memberDto.SignUpResponseDto;
+import hello.schedule2.dto.memberDto.MemberResponseDto;
+import hello.schedule2.dto.memberDto.SignUpResponseDto;
 import hello.schedule2.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

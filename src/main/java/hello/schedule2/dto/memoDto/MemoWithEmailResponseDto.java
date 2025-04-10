@@ -1,14 +1,14 @@
-package hello.schedule2.memoDto;
+package hello.schedule2.dto.memoDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
-public class MemoRequestDto {
-
-    private final String username;
+@Setter
+public class MemoWithEmailResponseDto {
     private final String title;
     private final String contents;
-
+    private final String email;
 }
