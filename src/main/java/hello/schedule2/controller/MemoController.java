@@ -55,7 +55,7 @@ public class MemoController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") //회원 삭제
     public ResponseEntity<Void> deleteMemo(@PathVariable long id) {
 
         //서비스 단으로 넘긴다

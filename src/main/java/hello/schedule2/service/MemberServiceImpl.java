@@ -20,6 +20,11 @@ public class MemberServiceImpl implements MemberService {
     @Override //회원가입
     public MemberResponseDto signup(String username, String email, String password, String mbti) {
 
+        // MemberRepository 인터페이스에서 기능을 구현추가 해줘서 사용한다.
+        if (memberRepository.existsByEmail(email)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "이미 사용중인 이메일입니다.");
+        }
+
         //객체에 데이터를 집어넣고
         Member member = new Member(username, email, password, mbti);
 
@@ -27,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
         Member savedMember = memberRepository.save(member);
 
         //집어넣은 repository를 dto에 전달
-        return new MemberResponseDto(savedMember.getUsername(), savedMember.getEmail(), savedMember.getMbti());
+        return new MemberResponseDto(savedMember.getId(),savedMember.getUsername(), savedMember.getEmail(), savedMember.getMbti());
     }
 
     @Override //회원 단일조회
@@ -45,7 +50,7 @@ public class MemberServiceImpl implements MemberService {
 
 
         //responseDto에 넣어준다.
-        return new MemberResponseDto(member.getUsername(), member.getEmail(), member.getMbti());
+        return new MemberResponseDto(member.getId(),member.getUsername(), member.getEmail(), member.getMbti());
     }
 
     @Override //회원 전체조회
@@ -55,7 +60,7 @@ public class MemberServiceImpl implements MemberService {
         List<Member> findAll = memberRepository.findAll();
 
         List<MemberResponseDto> list = findAll.stream()
-                .map(m -> new MemberResponseDto(m.getUsername(), m.getEmail(), m.getMbti()))
+                .map(m -> new MemberResponseDto(m.getId(),m.getUsername(), m.getEmail(), m.getMbti()))
                 .toList();
         return list;
 
@@ -87,5 +92,15 @@ public class MemberServiceImpl implements MemberService {
         if (isSamePassword) {
             memberRepository.delete(member);
         }
+    }
+
+    @Override
+    public MemberResponseDto loginUser(String email, String password) {
+
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("이메일 또는 비밀번호가 잘못되었습니다."));
+        if (!member.getPassword().equals(password)) {
+            throw new IllegalArgumentException("비밀번호가 틀렸습니다.");
+        }
+       return new MemberResponseDto(member.getId(),member.getUsername(), member.getEmail(), member.getMbti());
     }
 }

@@ -13,4 +13,5 @@ public interface MemberService {
 
     void delete(Long id,String password);
 
+    MemberResponseDto loginUser(String email, String password);
 }

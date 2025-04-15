@@ -74,7 +74,7 @@ public class MemoServiceImpl implements MemoService {
 //        return memoResponseDtoList;
     }
 
-    @Override //todo 메모 삭제 -->>본인인증이 들어가야함
+    @Override // 메모 삭제
     public void deleteMemo(long id) {
 
         //일단 삭제할 memo가 있는지 조회한다.
@@ -90,7 +90,7 @@ public class MemoServiceImpl implements MemoService {
         memoRepository.deleteById(id);
     }
 
-    @Override //메모 수정  -->> 질문하자 이렇게 하는게 맞는지
+    @Override //todo 메모 수정  -->> 질문하자 이렇게 하는게 맞는지
     public MemoResponseDto updateMemo(long id, String title, String content) {
         Optional<Memo> findById = memoRepository.findById(id);
 
